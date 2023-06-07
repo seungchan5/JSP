@@ -51,10 +51,10 @@
                       out.print(name + "님 환영합니다.");
                    } else {
                    %>
-                   <form action = "LoginAction.jsp" method = "post">
+                   <form action ="loginAction.jsp" method = "post">
                        <div class='loginbox'>
                            <div id='login'>
-                               <input type="text" name="userid" id="userpw" placeholder='ID를 입력해주세요.'>
+                               <input type="text" name="userid" id="userid" placeholder='ID를 입력해주세요.'>
                                <input type="password" name="userpw" id="userpw" placeholder='PW를 입력해주세요.'>
                            </div>
                            <div id='button'>
