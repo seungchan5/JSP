@@ -4,10 +4,19 @@
 <head><title>내장 객체 - response</title></head>
 <body>
     <h2>1. 로그인 폼</h2>
-   
+   	
+   	<%
+   	// 오류가 발생 한경우 
+   	// 메세지를 출력
+   	String loginErr = request.getParameter("loginErr");
+    if("Y".equals(loginErr)){
+    	out.print("아이디/비밀번호를 확인해주세요!");
+    }
+   	%>
     <form action="./ResponseLogin.jsp" method="post">
-        아이디 : <input type="text" name="user_id" /><br />
-        패스워드 : <input type="text" name="user_pwd" /><br />
+    <!-- 유효성 검사(validation check) : 사용자의 입력값이 유효한지 체크  -->
+        아이디 : <input type="text" name="user_id" required value="<%=request.getParameter("user_id")%>"/><br />
+        패스워드 : <input type="text" name="user_pwd" required="required"/><br />
         <input type="submit" value="로그인" />
     </form>
 
