@@ -23,7 +23,7 @@
 		out.print("로그인 성공");
 		
 		/*
-		response객체 : 요청에 대한 응답을 웹페이조로 보내주는 역할
+		response객체 : 요청에 대한 응답을 웹페이지로 보내주는 역할
 		
 		1. 페이지이동
 		
@@ -49,7 +49,7 @@
 				반환되는 페이지에서 이전 요청에대한 정보를 사용할 수 있습니다.
 				
 				[사용방법]
-				requst.getRequestDispatcher("페이지주소")
+				request.getRequestDispatcher("페이지주소")
 					.forward(request, response);		
 		*/
 	
