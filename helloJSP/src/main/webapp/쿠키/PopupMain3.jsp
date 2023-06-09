@@ -31,7 +31,7 @@ window.onload=function(){
 			const date = new Date();
 			// 12시간을 나타낸다
 			date.setTime(date.getTime()+12*60*60*1000);
-			document.cookie = "PopupClose=off;expires='+date+';"
+			document.cookie = "PopupClose=off;expires="+date.toGMTString();
 		}
 	}
 }
