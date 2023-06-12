@@ -16,6 +16,29 @@
   	<param-value>web.xml에 저장된 초기화 매개변수</param-value>
   </context-param>
   
+  <!-- DB 접속정보
+  		설정정보를 외부 파일로 저장
+   -->
+  <context-param>
+  	<param-name>OracleDriver</param-name>
+  	<param-value>oracle.jdbc.driver.OracleDriver</param-value>
+  </context-param>
+  
+  <context-param>
+  	<param-name>OracleUrl</param-name>
+  	<param-value>jdbc:oracle:thin:@localhost:1521:orcl</param-value>
+  </context-param>
+  
+  <context-param>
+  	<param-name>OracleId</param-name>
+  	<param-value>jsp</param-value>
+  </context-param>
+  
+  <context-param>
+  	<param-name>OraclePw</param-name>
+  	<param-value>1234</param-value>
+  </context-param>
+  
   <!-- 에러페이지 처리하기 -->
   <error-page>
   	<error-code>404</error-code>

@@ -1,3 +1,5 @@
+<%@page import="dto.Member"%>
+<%@page import="dao.MemberDao"%>
 <%@page import="utils.CookieManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,7 +15,10 @@
 		// name속성의 값을 매개값으로 넘겨주면 value속성의 값을 반환 합니다.
 		String id = request.getParameter("userid");
 		String pw = request.getParameter("userpw");
-
+		
+		MemberDao dao = new MemberDao(); 	
+		Member member = dao.login(id, pw);
+	
 		// 아이디 저장 체크박스
 		String saveYN = request.getParameter("save_check");
 		out.print("saveYN : " +saveYN+"<br>");
@@ -38,9 +43,8 @@
 		}
 		
 		
-		
-		if("abc".equals(id)
-				&& "123".equals(pw)){
+		// DB 조회 결과 id/pw가 일치하는 회원이 있으면 로그인 성공
+		if(member != null && !"".equals(member.getName())){
 			
 			out.print("로그인 성공");
 			response.sendRedirect("login.jsp?name="+id);
