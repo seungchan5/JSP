@@ -65,13 +65,17 @@
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td colspan="3"><%=board.getContent() %></td>
+			<td colspan="3" height="100"><%=board.getContent() %></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"><button type="button" onclick="location.href='Board.jsp'">목록 보기</button>
+			<td colspan="4" align="center">
+			<button type="button" onclick="location.href='Board.jsp'">목록 보기</button>
+			
 			<%if(session.getAttribute("UserId")!=null && board.getId().equals(session.getAttribute("UserId"))){%>
+			
 				<button type="button" onclick="location.href='Edit.jsp?num=<%=board.getNum()%>'">수정하기</button>
 				<button type="button" onclick="">삭제하기</button>
+				
 			<%} %></td>
 		</tr>
 	</table>
