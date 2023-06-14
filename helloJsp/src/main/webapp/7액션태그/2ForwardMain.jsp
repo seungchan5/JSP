@@ -20,7 +20,7 @@
 		request.setAttribute("rAttr", "요청영역");
 	%>
 	<jsp:forward page="2ForwardSub.jsp">
-		<jsp:param value="<%="페이지영역" %>" name="pAttr"/>
+		<jsp:param value="페이지영역" name="pAttr"/>
 	</jsp:forward>
 	
 </body>

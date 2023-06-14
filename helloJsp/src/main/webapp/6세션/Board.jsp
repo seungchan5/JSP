@@ -11,17 +11,17 @@
 </head>
 <body>
 <%
-	BoardDao dao = new BoardDao();
-	List<Board> boardList = dao.getList();
-	
-	int totalCnt = dao.getTotalCnt();
-	
 	String searchField = request.getParameter("searchField");
 	String searchWord = request.getParameter("searchWord");
 	
-	// 검색어가 null이 아니면 검색 기능을 추가
-	out.print(searchWord);
-	out.print(searchField);
+	// 검색어가 null인 경우 빈문자열로 치환
+	searchWord = searchWord == null ? "":searchWord;
+	
+	BoardDao dao = new BoardDao();
+	List<Board> boardList = dao.getList(searchField, searchWord);
+	
+	int totalCnt = dao.getTotalCnt(searchField, searchWord);
+	
 	
 %>
 
@@ -31,6 +31,7 @@
 총건수 : <%=totalCnt %>
 
 <!-- 검색폼 -->
+
 <form>
 	<table border="1" width="90%">
 		<tr>
@@ -68,7 +69,7 @@
 %>
 <tr>
 	<td><%=board.getNum() %></td>
-	<td><%=board.getTitle() %></td>
+	<td><a href="View.jsp?num=<%=board.getNum() %>"><%=board.getTitle() %></a></td>
 	<td><%=board.getId()%></td>
 	<td><%=board.getVisitcount() %></td>
 	<td><%=board.getPostdate() %></td>
@@ -79,14 +80,16 @@
 }
 %>
 </table>
+
+<%if(session.getAttribute("UserId") != null){ %> 
 <table border="1" width="90%">
 		<tr>
 			<td align="right">
-				<input type="submit" value="글쓰기">
+					<input type="submit" value="글쓰기" onclick="location.href='Write.jsp'">
 			</td>
 		</tr>
 	</table>
-
+<%} %>
 </body>
 </html>
 
