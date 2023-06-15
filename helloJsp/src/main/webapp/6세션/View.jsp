@@ -65,7 +65,7 @@
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td colspan="3" height="100"><%=board.getContent() %></td>
+			<td colspan="3" height="100"><%=board.getContent().replace("\r\n", "<br/>") %></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
@@ -74,7 +74,7 @@
 			<%if(session.getAttribute("UserId")!=null && board.getId().equals(session.getAttribute("UserId"))){%>
 			
 				<button type="button" onclick="location.href='Edit.jsp?num=<%=board.getNum()%>'">수정하기</button>
-				<button type="button" onclick="">삭제하기</button>
+				<button type="button" onclick="deletePost()">삭제하기</button>
 				
 			<%} %></td>
 		</tr>
