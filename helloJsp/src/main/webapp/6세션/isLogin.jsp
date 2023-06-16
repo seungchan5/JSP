@@ -13,7 +13,7 @@
 			%>
 			<script>
 				alert("로그인 후 이용 가능한 메뉴 입니다");
-				location.href="LoginForm.jsp";
+				location.href="/helloJsp/6세션/LoginForm.jsp";
 			</script>
 			<%
 		}

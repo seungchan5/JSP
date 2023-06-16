@@ -1,3 +1,4 @@
+<%@page import="dto.Criteria"%>
 <%@page import="dto.Board"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.BoardDao"%>
@@ -11,16 +12,23 @@
 </head>
 <body>
 <%
+	// 검색조건
 	String searchField = request.getParameter("searchField");
 	String searchWord = request.getParameter("searchWord");
+	String pageNo = request.getParameter("pageNo");
 	
-	// 검색어가 null인 경우 빈문자열로 치환
-	searchWord = searchWord == null ? "":searchWord;
+	// 검색조건 객체로 생성
+	Criteria criteria = new Criteria(searchField, searchWord, pageNo);
 	
+	// 게시판 DB 작업 - DAO생성
 	BoardDao dao = new BoardDao();
-	List<Board> boardList = dao.getList(searchField, searchWord);
 	
-	int totalCnt = dao.getTotalCnt(searchField, searchWord);
+	// 리스트 조회
+	//List<Board> boardList = dao.getList(searchField, searchWord);
+	List<Board> boardList = dao.getListPage(criteria);
+	
+	// 총 건수 조회
+	int totalCnt = dao.getTotalCnt(criteria);
 	
 	
 %>
@@ -32,7 +40,8 @@
 
 <!-- 검색폼 -->
 
-<form>
+<form name='searchForm'>
+<input type='hidden' name='pageNo' value='<%=criteria.getPageNo()%>'>
 	<table border="1" width="90%">
 		<tr>
 			<td align="center">
@@ -40,7 +49,7 @@
 					<option value="title">제목</option>
 					<option value="content">내용</option>
 				</select>
-				<input type="text" name="searchWord" value="<%=searchWord %>">
+				<input type="text" name="searchWord" value="<%=criteria.getSearchWord() %>">
 				<input type="submit" value="검색하기">
 			</td>
 		</tr>
@@ -90,6 +99,18 @@
 		</tr>
 	</table>
 <%} %>
+
+<!-- 페이지블럭 생성 시작 -->
+<%
+	PageDto pageDto = new PageDto(totalCnt, criteria);	
+%>
+<table border='1' width="90%">
+	<tr>
+		<td align="center">
+			<%@include file="PageNavi.jsp" %>
+		</td>
+</tr>
+</table>
 </body>
 </html>
 

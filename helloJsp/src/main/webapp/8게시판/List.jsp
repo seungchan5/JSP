@@ -1,3 +1,4 @@
+<%@page import="dto.PageDto"%>
 <%@page import="dto.Criteria"%>
 <%@page import="dto.Board"%>
 <%@page import="dao.NewBoardDao"%>
@@ -10,12 +11,16 @@
 <meta charset="UTF-8">
 <title>회원제 게시판</title>
 </head>
-<body>
-<%@include file="../6세션/Link.jsp" %>
 <%
+	
+
 	// 검색조건
 	String searchField = request.getParameter("searchField");
 	String searchWord = request.getParameter("searchWord");
+	
+	if(searchWord == null){
+		searchWord = "";
+	}
 	
 	
 	// 페이지번호
@@ -23,13 +28,19 @@
 	
 	Criteria criteria = new Criteria(searchField,searchWord, pageNo);
 	
-	
 	NewBoardDao dao = new NewBoardDao();
 	List<Board> list = dao.getListpage(criteria);
+	
+	int totalCnt = dao.getTotalCnt(criteria);
+	
+	out.print("총건수 : " + totalCnt);
 %>
+<body>
+<%@include file="../6세션/Link.jsp" %>
     <h2>목록 보기(List)</h2>
     <!-- 검색폼 --> 
-    <form method="get">  
+    <form method="get" name="searchForm"> 
+    <input type='text' name='pageNo' value='<%=criteria.getPageNo()%>'> 
     <table border="1" width="90%">
     <tr>
         <td align="center">
@@ -37,7 +48,7 @@
                 <option value="title">제목</option> 
                 <option value="content">내용</option>
             </select>
-            <input type="text" name="searchWord" value="<%=searchWord%>"/>
+            <input type="text" name="searchWord"/>
             <input type="submit" value="검색하기" />
         </td>
     </tr>   
@@ -69,7 +80,7 @@
         <tr align="center">
             <td><%=board.getNum() %></td>  <!--게시물 번호-->
             <td align="left">  <!--제목(+ 하이퍼링크)-->
-               <a href="View.jsp?num=<%=board.getNum()%>"><%=board.getTitle() %></a> 
+               <a href="View.jsp?num=<%=board.getNum()%>&pageNo=<%=criteria.getPageNo()%>"><%=board.getTitle() %></a> 
             </td>
             <td align="center"><%=board.getId()%></td>          <!--작성자 아이디-->
             <td align="center"><%=board.getVisitcount() %></td>  <!--조회수-->
@@ -89,5 +100,23 @@
         </tr>
     </table>
     <%} %>
+    
+    <!-- 
+    	페이지블럭 생성시작
+    	- 총 건수
+    	- 쿼리수정
+    	- form의 이름을 searchForm으로 지정
+    	- pageNo 필드 생성
+     -->
+<%
+	PageDto pageDto = new PageDto(totalCnt, criteria);	
+%>
+<table border='1' width="90%">
+	<tr>
+		<td align="center">
+			<%@include file="../9페이지/PageNavi.jsp" %>
+		</td>
+</tr>
+</table>
 </body>
 </html>

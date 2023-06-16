@@ -2,8 +2,8 @@ package dto;
 
 public class Criteria {
 	
-	String searchField; // 검색조건
-	String searchWord; // 검색어
+	String searchField=""; // 검색조건
+	String searchWord=""; // 검색어
 	
 	int pageNo = 1; // 요청한 페이지 번호
 	int amount = 10; // 한페지당 보여질 게시물 수
@@ -26,6 +26,22 @@ public class Criteria {
 			this.pageNo = pageNo;
 			endNo = pageNo * amount;
 			startNo = pageNo * amount - (amount - 1);
+		}
+	}
+	
+	public Criteria(String searchField, String searchWord, String pageNoStr) {
+		if(searchWord != null) {
+			this.searchField = searchField;
+			this.searchWord = searchWord;
+		}
+		if(pageNoStr != null) {
+			pageNo = Integer.parseInt(pageNoStr);
+			if(pageNo>0) {
+				endNo = pageNo * amount;
+				startNo = pageNo * amount - (amount - 1);
+			} else {
+				pageNo = 1;
+			}
 		}
 	}
 	

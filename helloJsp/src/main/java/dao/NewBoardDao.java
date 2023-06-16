@@ -17,6 +17,34 @@ public class NewBoardDao {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public int getTotalCnt(Criteria criteria) {
+		int totalCnt = 0;
+		String sql ="select count(*) from board";
+				
+		if(criteria.getSearchWord() != null && !"".equals(criteria.getSearchWord())) {
+			sql += " where "+ criteria.getSearchField() +" like '%"+criteria.getSearchWord()+"%'";
+		}		
+		
+		sql += " order by num desc";
+		
+		
+		try (Connection conn = DBConnectionPool.getConnection();
+				PreparedStatement psmt = conn.prepareStatement(sql);) {
+			ResultSet rs = psmt.executeQuery();
+			
+			rs.next();
+			totalCnt = rs.getInt(1); // 첫번째 컬럼의 값을 반환
+			
+			rs.close();
+		} catch (SQLException e) {
+			System.err.println("총 게시물의 수를 조회 하던중 예외가 발생");
+			e.printStackTrace();
+		}
+		
+		
+		return totalCnt;
+	}
+	
 	public List<Board> getList(Criteria criteria){
 		List<Board> list = new ArrayList<>();
 		
@@ -58,7 +86,8 @@ public class NewBoardDao {
 	public List<Board> getListpage(Criteria criteria){
 		List<Board> list = new ArrayList<>();
 		
-		String sql="select * from("
+		String sql=""
+				+"select * from("
 				+ "select rownum rn, t.*"
 				+ "from("
 				+ "select num, title, content, id, "
