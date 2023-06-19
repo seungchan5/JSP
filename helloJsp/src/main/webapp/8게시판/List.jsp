@@ -92,7 +92,7 @@
 %>
 
     </table>
-    <%if(session.getAttribute("UserId") != null){ %> 
+    <%if(session.getAttribute("UserId") != null && !"".equals(session.getAttribute("UserId"))){ %> 
     <!--목록 하단의 [글쓰기] 버튼-->
     <table border="1" width="90%">
         <tr align="right">

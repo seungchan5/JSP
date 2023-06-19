@@ -1,4 +1,3 @@
-<%@page import="javax.tools.DocumentationTool.Location"%>
 <%@page import="common.JSFunction"%>
 <%@page import="dto.Board"%>
 <%@page import="dao.BoardDao"%>

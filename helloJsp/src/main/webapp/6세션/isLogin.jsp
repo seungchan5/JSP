@@ -16,6 +16,7 @@
 				location.href="/helloJsp/6세션/LoginForm.jsp";
 			</script>
 			<%
+			return;
 		}
 	%>
 </body>

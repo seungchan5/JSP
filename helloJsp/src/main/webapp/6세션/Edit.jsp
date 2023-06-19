@@ -1,4 +1,3 @@
-<%@page import="common.JSFunction"%>
 <%@page import="dto.Board"%>
 <%@page import="dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="Link.jsp"></jsp:include>
+<%@include file="Link.jsp" %>
 <h2>수정하기</h2>
 
 <%
@@ -25,7 +24,7 @@
 	<table border="1" width="90%">
 		<tr>
 			<td>제목</td>
-			<td><input type="text" id="texta" value="<%=board.getTitle() %>" name="title" style="width:90%"></td>
+			<td><input type="text" value="<%=board.getTitle() %>" name="title" style="width:90%"></td>
 		</tr>
 		<tr>
 			<td>내용</td>
