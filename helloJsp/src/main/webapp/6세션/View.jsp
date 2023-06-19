@@ -23,6 +23,8 @@
 		return;
 	}
 	
+	// 영역에 저장
+	request.setAttribute("board", board);
 	
 	
 	//if(board != null){
@@ -49,23 +51,23 @@
 	<table border="1" width="90%">
 		<tr>
 			<td>번호</td>
-			<td><%=board.getNum() %></td>
+			<td>${board.num}</td>
 			<td>작성자</td>
-			<td><%=board.getId() %></td>
+			<td>${board.id}</td>
 		</tr>
 		<tr>
 			<td>작성일</td>
-			<td><%=board.getPostdate() %></td>
+			<td>${board.postdate}</td>
 			<td>조회수</td>
-			<td><%=board.getVisitcount() %></td>
+			<td>${board.visitcount}</td>
 		</tr>
 		<tr>
 			<td>제목</td>
-			<td colspan="3"><%=board.getTitle() %></td>
+			<td colspan="3">${board.title}</td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td colspan="3" height="100"><%=board.getContent().replace("\r\n", "<br/>") %></td>
+			<td colspan="3" height="100">${board.content}</td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">

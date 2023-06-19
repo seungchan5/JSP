@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd ">
+  <tlib-version>1.0</tlib-version>
+  <short-name>myTagLIB</short-name>
+<!-- 태그라이브러리를 활용해서 메서드를 등록 후 사용 -->
+
+<function>
+	<!-- 메서드명 -->
+	<name>isNumber</name>
+	<!-- 패키지를 포함한 클래스명 -->
+	<function-class>el.MyELClass</function-class>
+	<!-- 메서드 시그니쳐
+	기본자료형이 아닌경우, 패키지를 포함한 전체경로를 지정 -->
+	<function-signature>boolean isNumber(java.lang.String)</function-signature>
+</function>
+</taglib>
