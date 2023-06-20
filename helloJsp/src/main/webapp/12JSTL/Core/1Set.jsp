@@ -34,6 +34,23 @@
 	 
 	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	 
+	 <!-- 
+	Core태그
+	변수선언, 조건문, 반복문등을 대체 하는 태그를 제공
+	
+	set 	: 변수선언 (setAttribute())
+	remove 	: 변수제거 (removeAttribute())
+	if		: 단일 조건문 처리(else문 없음)
+	choose 	: 다중 조건문 처리(when ~ otherwise 태그 이용)
+	forEach : 반복문 처리
+	forTokens : 구분자로 분리된 토큰을 처리 
+	import 	: 외부파일 삽입
+	redirect: 지정한 경로로 이동(sendRedirect())
+	url 	: 경로를 설정
+	out		: 내용을 출력
+	catch	: 예외처리
+ 	-->
+	 
 	 <!-- 1. 변수 선언
 	 	var : 변수명 
 	 	value : 값
