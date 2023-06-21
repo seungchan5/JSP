@@ -6,12 +6,28 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+	//유효성 검사
 	function validateForm(form){
-		alert(form.name.value);
-		alert(form.attachedFile.value);
-		alert(form.category.value);
-		return false;
-
+		if(form.name.value == ''){
+			alert("작성자를 입력하세요");
+			form.name.focus();
+			return false;
+		}
+		
+		if(form.title.value == ''){
+			alert("제목을 입력하세요");
+			form.title.focus();
+			return false;
+		}
+		
+		if(form.attachedFile.value ==''){
+			alert("첨부파일은 필수 입력 입니다");
+			return false;
+		}
+		if(document.querySelectorAll("[name=category]:checked").length == 0){
+			alert("카테고리를 선택해주세요")
+			return false;
+		}
 	}
 </script>
 </head>
@@ -40,7 +56,7 @@
 				<input type="checkbox" name="category" value="음원">음원
 		</p>
 		<p>	
-			첨부파일 : <input type="file" name="attachedfile">
+			첨부파일 : <input type="file" name="attachedFile">
 		</p>
 			<input type="submit" value="전송하기">
 	</form>
@@ -53,5 +69,8 @@
 			<form>태그를 통해 파일을 서버로 전송할때 사용
 			모든 문자를 인코딩하지 않음
 	 -->
+	 
+	 <h3>다운로드</h3>
+	 <a href="${pageContext.request.contextPath }/upload/사원정보.xlsx" download="파일명">다운로드</a>
 </body>
 </html>
