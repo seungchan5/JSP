@@ -40,6 +40,7 @@
 	<!-- 
 	유효성검사, validation체크
 	사용자입력체크 로직추가 -->
+	${errorMessage }
 	<form action="UploadProcess.jsp" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this);">
 		<p>
 			작성자 : <input type="text" name="name" value="하니">

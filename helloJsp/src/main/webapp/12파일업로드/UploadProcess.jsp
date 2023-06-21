@@ -1,3 +1,4 @@
+<%@page import="common.JSFunction"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -18,7 +19,7 @@
 		String saveDirectory = "C:/upload";
 	
 		//webapp폴더 하위에 디렉토리를 생성
-		saveDirectory = "C:\\Users\\user\\git\\JSP\\helloJsp\\src\\main\\webapp\\upload";
+		//saveDirectory = "C:\\Users\\user\\git\\JSP\\helloJsp\\src\\main\\webapp\\upload";
 		
 		
 		// 파일의 최대 크기(1MB)
@@ -86,15 +87,18 @@
 			if(res>0) {
 				out.print("등록 되었습니다");
 				// 리스트 페이지로 이동
+				JSFunction.alertLocation("등록 되었습니다", "FileList.jsp", out);
 			} else{
 				out.print("DB등록에 실패 하였습니다");
 				// 이전페이지로 이동
+				JSFunction.alertBack("등록 실패하였습니다", out);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			out.print(e);
 			request.setAttribute("errorMsg", "파일업로드 오류");
+			JSFunction.alertBack("파일 업로드 오류 발생", out);
 			
 			// 이전페이지로 이동
 		}
