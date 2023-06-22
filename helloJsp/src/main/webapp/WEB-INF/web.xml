@@ -41,4 +41,66 @@
     <error-code>500</error-code>
     <location>/내장객체/Exception.jsp</location>
   </error-page>
+  
+  <resource-ref>
+	 <description>Oracle Datasource example</description>
+	 <res-ref-name>jdbc/myoracle</res-ref-name>
+	 <res-type>javax.sql.DataSource</res-type>
+	 <res-auth>Container</res-auth>
+	</resource-ref>
+	
+	<!-- 세션 유지시간을 분단위로 설정 -->
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+  
+  <!-- 필터를 활용한 인코딩 설정 -->
+    <filter>
+    <filter-name>SetCharacterEncodingFilter</filter-name>
+    <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+    <init-param>
+    	<param-name>encoding</param-name>
+    	<param-value>utf-8</param-value>
+    </init-param>
+</filter>
+<filter-mapping>
+    <filter-name>SetCharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+<!-- 서블릿 등록 -->
+<servlet>
+	<servlet-name>HelloServlet</servlet-name>
+	<servlet-class>servlet.HelloServlet</servlet-class>
+</servlet>
+  
+<servlet-mapping>
+	<servlet-name>HelloServlet</servlet-name>
+	<url-pattern>/13서블릿/HelloServlet.do</url-pattern>
+</servlet-mapping>  
+
+<!-- MemberAuth -->
+<servlet>
+	<servlet-name>MemberAuth</servlet-name>
+	<servlet-class>servlet.MemberAuth</servlet-class>
+	<init-param>	
+		<param-name>admin_id</param-name>
+		<param-value>nakja</param-value>
+	</init-param>
+</servlet>
+<servlet-mapping>
+	<servlet-name>MemberAuth</servlet-name>
+	<url-pattern>/13서블릿/MemberAuth.mvc</url-pattern>
+</servlet-mapping>
+
+<!-- 게시판 리스트 조회 -->
+<servlet>
+	<servlet-name>MVCBoardList</servlet-name>
+	<servlet-class>model2.mvcboard.ListController</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>MVCBoardList</servlet-name>
+	<url-pattern>/14MVCBoard/List.do</url-pattern>
+</servlet-mapping>
 </web-app>
