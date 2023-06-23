@@ -8,6 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	function go(page){
+		document.searchForm.pageNo.value=page;
+		document.searchForm.submit();
+		
+	}
+</script>
 </head>
 <body>
 	<!-- 
@@ -19,17 +26,23 @@
 		- 다음 버튼을 출력할지 여부
 	 -->
 	 <!--  영역에 저장 -->
-	 <c:set var="pageDto" value="<%=pageDto %>"></c:set>
+	 <c:set var="pageDto" value="${pageDto }"></c:set>
+	 
+	 <!-- 이전 버튼 -->
 	 <c:if test="${pageDto.prev }">
-	 	<a href='List.jsp?pageNo=${pageDto.startNo-1}'>이전</a>
+	 	<!--  <a href='List.jsp?pageNo=${pageDto.startNo-1}'>이전</a>-->
+	 	<input type='button' value='이전' onclick='go(${pageDto.startNo-1})'>
 	 </c:if>
 	 
 	 <c:forEach begin="${pageDto.startNo }" end="${pageDto.endNo }" var="i">
-	 	<a href='List.jsp?pageNo=${i }'>${i }</a>
+	 	<!--  <a href='List.jsp?pageNo=${i }'>${i }</a>-->
+	 	<input type='button' value='${i }' onclick='go(${i})'>
 	 </c:forEach>
 	 
+	 <!-- 다음 버튼 -->
 	 <c:if test="${pageDto.next }">
-	 	<a href='List.jsp?pageNo="${pageDto.endNo+1 }'>다음</a>
+	 	<!--  <a href='List.jsp?pageNo="${pageDto.endNo+1 }'>다음</a> -->
+	 	<input type='button' value='다음' onclick='go(${pageDto.endNo+1})'>
 	 </c:if>
 
 	 <%

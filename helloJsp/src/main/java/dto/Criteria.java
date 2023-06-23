@@ -34,7 +34,7 @@ public class Criteria {
 			this.searchField = searchField;
 			this.searchWord = searchWord;
 		}
-		if(pageNoStr != null) {
+		if(pageNoStr != null && !"".equals(pageNoStr)) {
 			pageNo = Integer.parseInt(pageNoStr);
 			if(pageNo>0) {
 				endNo = pageNo * amount;

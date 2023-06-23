@@ -101,6 +101,17 @@
 
 <servlet-mapping>
 	<servlet-name>MVCBoardList</servlet-name>
-	<url-pattern>/14MVCBoard/List.do</url-pattern>
+	<url-pattern>/mvcboard/list.do</url-pattern>
+</servlet-mapping>
+
+<!-- 글쓰기 페이지로 이동 -->
+<servlet>
+	<servlet-name>MVCBoardWriteController</servlet-name>
+	<servlet-class>model2.mvcboard.WriteController</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>MVCBoardWriteController</servlet-name>
+	<url-pattern>/mvcboard/write.do</url-pattern>
 </servlet-mapping>
 </web-app>

@@ -16,6 +16,13 @@
 		
 	}
 </script>
+
+<!-- 영역에 저장 -->
+<c:set var="pageDto" value="<%=pageDto %>"></c:set>
+<c:if test="${pageDto.prev}">
+
+
+</c:if>
 <%	
 
 	if(pageDto.isPrev()){
