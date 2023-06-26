@@ -267,7 +267,7 @@ public class MVCBoardDao {
 	public int update(MVCBoardDto dto) {
 		int res = 0;
 		
-		String sql = "update mvcboard set name = ? , title = ?, content = ?, ofile = ? where idx = ? and pass = ?";
+		String sql = "update mvcboard set name = ? , title = ?, content = ?, ofile = ?, sfile=? where idx = ?";
 		
 		System.out.println(sql);
 		try (Connection conn = DBConnectionPool.getConnection();
@@ -277,8 +277,9 @@ public class MVCBoardDao {
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getContent());
 			psmt.setString(4, dto.getOfile());
-			psmt.setString(5, dto.getIdx());
-			psmt.setString(6, dto.getPass());
+			psmt.setString(5, dto.getSfile());
+			psmt.setString(6, dto.getIdx());
+			
 			
 			res = psmt.executeUpdate();
 			
