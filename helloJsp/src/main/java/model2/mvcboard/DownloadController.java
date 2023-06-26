@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.FileUtil;
+
 /**
- * Servlet implementation class ViewController
+ * Servlet implementation class DownloadController
  */
-@WebServlet("/mvcboard/view.do")
-public class ViewController extends HttpServlet {
+@WebServlet("/mvcboard/download.do")
+public class DownloadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewController() {
+    public DownloadController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,17 +28,10 @@ public class ViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 게시물 조회
-		MVCBoardDao dao = new MVCBoardDao();
-		dao.updateVisitCount(request.getParameter("idx"));
-		MVCBoardDto dto = dao.selectOne(request.getParameter("idx"));
+		String ofile = request.getParameter("ofile");
+		String sfile = request.getParameter("sfile");
 		
-		// 조회된 게시물 저장(request영역)
-		request.setAttribute("dto", dto);
-		
-		// View.jsp페이지로 포워딩
-		request.getRequestDispatcher("../14MVCBoard/View.jsp").forward(request, response);
-		
+		FileUtil.download(request, response, "c:\\upload", ofile, sfile);
 	}
 
 	/**

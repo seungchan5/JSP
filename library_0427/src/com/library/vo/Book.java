@@ -29,6 +29,8 @@ public class Book {
 		// 도서가 rentYN=Y(대여중)인 경우 대여중으로 표시
 		if("Y".equals(getRentyn())) {
 			rentYNStr="대여중";
+		} else {
+			rentYNStr="대여가능";
 		}
 		return getNo()
 				+ " " + getTitle()

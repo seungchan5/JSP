@@ -11,7 +11,7 @@
 <body>
 	<aside id='rightside'>
 	<div class='side1'>
-		<form action ="loginAction.jsp" method = "post">
+		<form action ="./login/LoginAction.do" method = "post">
 		<%
 		
 			String userId = CookieManager.readCookie(request, "userId");

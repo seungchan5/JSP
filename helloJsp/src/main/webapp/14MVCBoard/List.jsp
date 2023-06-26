@@ -60,7 +60,14 @@
 						<td>${row.name }</td>
 						<td>${row.visitcount }</td>
 						<td>${row.postdate }</td>
-						<td>첨부파일</td>
+						<td align="center">
+							<!-- 첨부파일이 있으면 다운로드 -->
+							<c:if test = "${ not empty row.ofile }">
+								<a href="../mvcboard/download.do?ofile=${row.ofile }&sfile=${row.sfile}">
+									[Down]
+								</a>
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

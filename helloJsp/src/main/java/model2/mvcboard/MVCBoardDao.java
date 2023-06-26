@@ -74,7 +74,7 @@ public class MVCBoardDao {
 				+") tb)"
 				+"where rn between ? and ?";
 		
-		System.out.println("검색 sql : " + sql);
+		//System.out.println("검색 sql : " + sql);
 		try (Connection conn = DBConnectionPool.getConnection();
 				PreparedStatement psmt = conn.prepareStatement(sql);) {
 			
@@ -139,8 +139,8 @@ public class MVCBoardDao {
 	public int insert(MVCBoardDto dto) {
 		int res = 0;
 		
-		String sql = "insert into mvcboard (idx, name, title, content, pass)"
-			    + "values (seq_mvcboard_num.nextval, '?', '?','?','?')";
+		String sql = "insert into mvcboard (idx, name, title, content, pass, ofile, sfile)"
+			    + "values (seq_mvcboard_num.nextval, ?, ?, ?, ?, ?, ?)";
 		
 		try (Connection conn = DBConnectionPool.getConnection();
 				PreparedStatement psmt = conn.prepareStatement(sql);) {
@@ -149,12 +149,14 @@ public class MVCBoardDao {
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getContent());
 			psmt.setString(4, dto.getPass());
+			psmt.setString(5, dto.getOfile());
+			psmt.setString(6, dto.getSfile());
 			
 			// insert, update, delete 실행 후 몇건이 처리 되었는지 반환
 			res = psmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("게시물 입력중 예외 발생");
 			e.printStackTrace();
 		}
 		
@@ -237,6 +239,54 @@ public class MVCBoardDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		return res;
+	}
+	
+	public int updateVisitCount(String idx) {
+		int res = 0;
+		String sql="update mvcboard set visitcount = visitcount+1 where idx = ?";
+		
+		
+		try (Connection conn = DBConnectionPool.getConnection();
+				PreparedStatement psmt = conn.prepareStatement(sql);) {
+			
+			psmt.setString(1, idx);
+			
+			res = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public int update(MVCBoardDto dto) {
+		int res = 0;
+		
+		String sql = "update mvcboard set name = ? , title = ?, content = ?, ofile = ? where idx = ? and pass = ?";
+		
+		System.out.println(sql);
+		try (Connection conn = DBConnectionPool.getConnection();
+				PreparedStatement psmt = conn.prepareStatement(sql);) {
+			
+			psmt.setString(1, dto.getName());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getOfile());
+			psmt.setString(5, dto.getIdx());
+			psmt.setString(6, dto.getPass());
+			
+			res = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		
 		return res;
