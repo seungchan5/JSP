@@ -8,9 +8,10 @@
 </head>
 <body>
 	<!-- 검색 폼 시작 -->
-	<form method="get" name="searchForm">		
+	<form method="get" name="searchForm" >		
 		<!-- 페이지 번호 -->
 		<input type="text" name="pageNo">
+		<input type="text" name="delNo">
 		
 		<table border="1" width="100%">
 			 <tr>

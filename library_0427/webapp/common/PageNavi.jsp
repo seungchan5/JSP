@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script>
 	function go(page){
+		document.searchForm.action = "./list.book";
 		document.searchForm.pageNo.value=page;
 		document.searchForm.submit();
 		

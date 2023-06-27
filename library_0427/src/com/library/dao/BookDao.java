@@ -96,11 +96,11 @@ public class BookDao {
 	 * 도서 삭제
 	 * @return
 	 */
-	public int delete(int no) {
+	public int delete(String noStr) {
 		int res = 0;
 		
 		String sql = String.format
-						("delete from book where no = %d", no);
+						("delete from book where no in (%s)", noStr);
 	
 		// 실행될 쿼리를 출력해봅니다
 		//System.out.println(sql);

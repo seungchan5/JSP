@@ -6,6 +6,30 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/style1.css">
+<script type="text/javascript">
+	
+	let message = '${message}';
+	if(message != null && "" != message){
+		alert(message);
+	}
+	
+	function deleteBook(){
+		// 체크박스가 선택된 요소는 value값을 ,로 연결
+		delNoList = document.querySelectorAll("[name=delNo]:checked");
+		
+		let delNo = "";
+		delNoList.forEach((e)=>{
+			delNo += e.value + ',';
+		});
+		
+		delNo = delNo.substr(0, delNo.length-1);
+		console.log("삭제할 번호 : "+delNo);
+		// 삭제 요청
+		searchForm.action= "../book/delete.book";
+		searchForm.delNo.value= delNo;
+		searchForm.submit();
+	}
+</script>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
@@ -18,10 +42,10 @@
 	<table border="1">
 		<c:if test="${sessionScope.adminYn eq 'Y' }">
 		<tr>
-			<td colspan="5" class="rigth">
+			<td colspan="5" class="right">
 				<!-- 어드민 계정인 경우 등록, 삭제 버튼을 출력 -->
 				<button>도서등록</button>
-				<button>도서삭제</button>
+				<button onclick="deleteBook()">도서삭제</button>
 			</td>
 		</tr>
 		</c:if>

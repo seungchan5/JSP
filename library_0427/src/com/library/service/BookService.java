@@ -49,14 +49,9 @@ public class BookService {
 		}
 	}
 
-	public void delete(int no) {
-		int res = dao.delete(no);
-		if(res>0) {
-			System.out.println(res+"건 삭제되었습니다.");
-		} else {
-			System.err.println("삭제중 오류가 발생 하였습니다.");
-			System.err.println("관리자에게 문의 해주세요");
-		}
+	public int delete(String noStr) {
+		int res = dao.delete(noStr);
+		return res;
 	}
 
 	public void rentBook(int bookNo) {

@@ -1,6 +1,7 @@
 package com.library.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,10 +28,22 @@ public class BookController extends HttpServlet{
 			Criteria cri = new Criteria(req.getParameter("searchField"), req.getParameter("searchWord"), req.getParameter("pageNo"));
 			
 			// 리스트 조회 및 요청 객체에 저장
-			req.setAttribute("map", bs.getList(cri));
+			Map<String, Object> map = bs.getList(cri);
+			req.setAttribute("map", map);
 			
 			// 포워딩
 			req.getRequestDispatcher("./list.jsp").forward(req, resp);
+		
+		} else if(uri.indexOf("delete") > 0) {
+			
+			int res = bs.delete(req.getParameter("delNo"));
+			if(res>0) {
+				req.setAttribute("message", res+ "건 삭제 되었습니다");
+			} else {				
+				req.setAttribute("message", "삭제 실패");
+			}
+			
+			req.getRequestDispatcher("./list.book").forward(req, resp);
 		}
 	}
 	
