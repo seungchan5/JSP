@@ -12,7 +12,7 @@
 		<!-- 페이지 번호 -->
 		<input type="text" name="pageNo">
 		
-		<table border="1" width="90%">
+		<table border="1" width="100%">
 			 <tr>
         		<td align="center">
             		<select name="searchField"> 

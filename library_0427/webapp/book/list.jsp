@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/style1.css">
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
@@ -55,11 +56,13 @@
 				</tr>
 			</c:forEach>
 		</c:if>
-	</table>
-	
-	
-	<!-- 페이징 -->
-	
+		<tr>
+		<!-- 페이징 -->
+			<td colspan='5'>
+				<%@include file="../common/PageNavi.jsp" %>
+			</td>
+		</tr>
+	</table>	
 	<!-- 상세 -->
 	
 	<!-- 삭제 -->

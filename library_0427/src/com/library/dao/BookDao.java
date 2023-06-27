@@ -24,7 +24,8 @@ public class BookDao {
 		
 		//String sql = "select * from book order by no";
 		String sql = 
-				"select no, title"
+				"select * from (select tb.*, rownum rn from("
+				+"select no, title"
 				+ "    , nvl((select 대여여부 "
 				+ "			 from 대여 "
 				+ "			where 도서번호 = no "
@@ -36,13 +37,18 @@ public class BookDao {
 			sql += "where " + cri.getSearchField() + " like '%" + cri.getSearchWord() + "%'";
 			
 		}
-				sql += "order by no";
+				sql += "order by no"
+						+")tb )"
+						+"where rn between "+cri.getStartNo()+" and "+cri.getEndNo();
+				
 		
 		// try ( 리소스생성 ) => try문이 종료되면서 리소스를 자동으로 반납
 		try (Connection conn = DBConnectionPool.getConnection();
 				Statement stmt = conn.createStatement();
 				// stmt.executeQuery : resultSet (질의한 쿼리에 대한 결과집합)
 				// stmt.executeUpdate : int (몇건이 처리되었는지!!!)
+				
+				
 				ResultSet rs = stmt.executeQuery(sql)){
 			while(rs.next()) {
 				int no = rs.getInt(1);
