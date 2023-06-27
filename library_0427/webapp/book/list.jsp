@@ -9,7 +9,7 @@
 <body>
 	<%@ include file="../common/header.jsp" %>
 	<h2>도서목록</h2>
-	총 건수 : 
+	총 건수 : ${map.totalCnt }
 	<!-- 검색 폼 시작 -->
 	<%@ include file="../common/SearchForm.jsp" %>
 	<!-- 검색 폼 끝 -->
@@ -32,13 +32,13 @@
 			<th width="20%">대여여부/반납일</th>
 			<th width="20%">등록일</th>
 		</tr>
-		<c:if test="${empty list}" var="res">
+		<c:if test="${empty map.list}" var="res">
 			<tr>
-				<td colspan="5">등록된 게시물 없음</td>
+				<td colspan="5" class="center">등록된 게시물 없음</td>
 			</tr>
 		</c:if>
 		<c:if test="${not res }">
-			<c:forEach items="${list }" var="book" step="1">
+			<c:forEach items="${map.list }" var="book" step="1">
 				<tr>
 					<td class="center">
 						<!-- 삭제용 체크박스 -->

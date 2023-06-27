@@ -1,21 +1,25 @@
 package com.library.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.library.common.ConnectionUtil;
+import com.library.common.DBConnectionPool;
 import com.library.vo.Book;
+import com.library.vo.Criteria;
+
 
 public class BookDao {
 	/**
 	 * 도서목록 조회
+	 * @param cri 
 	 * @return
 	 */
-	public List<Book> getList(){
+	public List<Book> getList(Criteria cri){
 		List<Book> list = new ArrayList<Book>();
 		
 		//String sql = "select * from book order by no";
@@ -26,11 +30,16 @@ public class BookDao {
 				+ "			where 도서번호 = no "
 				+ "			  and 대여여부='Y'),'N') rentyn "
 				+ "    , author "
-				+ "from book "
-				+ "order by no";
+				+ "from book ";
+		if(cri.getSearchWord() != null && !"".equals(cri.getSearchWord())) {
+			
+			sql += "where " + cri.getSearchField() + " like '%" + cri.getSearchWord() + "%'";
+			
+		}
+				sql += "order by no";
 		
 		// try ( 리소스생성 ) => try문이 종료되면서 리소스를 자동으로 반납
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = DBConnectionPool.getConnection();
 				Statement stmt = conn.createStatement();
 				// stmt.executeQuery : resultSet (질의한 쿼리에 대한 결과집합)
 				// stmt.executeUpdate : int (몇건이 처리되었는지!!!)
@@ -67,7 +76,7 @@ public class BookDao {
 		// 실행될 쿼리를 출력해봅니다
 		//System.out.println(sql);
 		
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = DBConnectionPool.getConnection();
 				Statement stmt = conn.createStatement();	){
 			res = stmt.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -90,7 +99,7 @@ public class BookDao {
 		// 실행될 쿼리를 출력해봅니다
 		//System.out.println(sql);
 		
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = DBConnectionPool.getConnection();
 				Statement stmt = conn.createStatement();	){
 			res = stmt.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -113,7 +122,7 @@ public class BookDao {
 		// 실행될 쿼리를 출력해봅니다
 		//System.out.println(sql);
 		
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = DBConnectionPool.getConnection();
 				Statement stmt = conn.createStatement();	){
 			res = stmt.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -130,7 +139,7 @@ public class BookDao {
 					"SELECT RENTYN FROM BOOK WHERE NO = %s", bookNo);
 		
 		
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = DBConnectionPool.getConnection();
 				Statement stmt= conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);){
 			// 조회된 행이 있는지 확인
@@ -145,6 +154,34 @@ public class BookDao {
 		}
 		
 		return rentYN;
+	}
+
+	public int getTotalCnt(Criteria cri) {
+		int totalCnt = 0;
+		String sql ="select count(*) from book";
+				
+		if(cri.getSearchWord() != null && !"".equals(cri.getSearchWord())) {
+			sql += " where "+ cri.getSearchField() +" like '%"+cri.getSearchWord()+"%'";
+		}		
+		
+		sql += " order by no desc";
+		
+		
+		try (Connection conn = DBConnectionPool.getConnection();
+				PreparedStatement psmt = conn.prepareStatement(sql);) {
+			ResultSet rs = psmt.executeQuery();
+			
+			rs.next();
+			totalCnt = rs.getInt(1); // 첫번째 컬럼의 값을 반환
+			
+			rs.close();
+		} catch (SQLException e) {
+			System.err.println("총 게시물의 수를 조회 하던중 예외가 발생");
+			e.printStackTrace();
+		}
+		
+		
+		return totalCnt;
 	}
 }
 

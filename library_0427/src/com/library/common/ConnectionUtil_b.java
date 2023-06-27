@@ -12,7 +12,7 @@ import java.sql.Statement;
  * @author oms
  *
  */
-public class ConnectionUtil {
+public class ConnectionUtil_b {
 
 	/**
 	 * DB Connection을 반환 합니다

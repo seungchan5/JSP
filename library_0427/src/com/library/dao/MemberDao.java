@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.library.common.ConnectionUtil;
+import com.library.common.ConnectionUtil_b;
 import com.library.vo.Member;
 
 public class MemberDao {
@@ -25,7 +25,7 @@ public class MemberDao {
 		// 쿼리 출력
 		// System.out.println(sql);
 		
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = ConnectionUtil_b.getConnection();
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);){
 			// 질의결과 결과집합을 member객체에 담아줍니다
@@ -54,7 +54,7 @@ public class MemberDao {
 				, member.getName(), member.getAdminyn());
 		
 		System.out.println(sql);
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = ConnectionUtil_b.getConnection();
 				Statement stmt = conn.createStatement();){
 			res = stmt.executeUpdate(sql);
 			
@@ -80,7 +80,7 @@ public class MemberDao {
 		String sql = String.format(
 				"select * from member where id = '%s'",id);
 		System.out.println(sql);
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = ConnectionUtil_b.getConnection();
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);){
 			
@@ -102,7 +102,7 @@ public class MemberDao {
 		
 		System.out.println(sql);
 		
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = ConnectionUtil_b.getConnection();
 				Statement stmt = conn.createStatement();){
 			
 			res = stmt.executeUpdate(sql);

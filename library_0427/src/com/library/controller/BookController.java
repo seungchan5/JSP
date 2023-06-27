@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.library.service.BookService;
+import com.library.vo.Criteria;
 
 @WebServlet("*.book")
 public class BookController extends HttpServlet{
@@ -21,7 +22,14 @@ public class BookController extends HttpServlet{
 		System.out.println("요청 uri : " + uri);
 		
 		if(uri.indexOf("list") > 0) {
-			req.setAttribute("list", bs.getList()); 
+			
+			// 검색조건 세팅
+			Criteria cri = new Criteria(req.getParameter("searchField"), req.getParameter("searchWord"), req.getParameter("pageNo"));
+			
+			// 리스트 조회 및 요청 객체에 저장
+			req.setAttribute("map", bs.getList(cri));
+			
+			// 포워딩
 			req.getRequestDispatcher("./list.jsp").forward(req, resp);
 		}
 	}

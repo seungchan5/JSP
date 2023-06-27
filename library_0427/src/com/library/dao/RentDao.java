@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.library.common.ConnectionUtil;
+import com.library.common.ConnectionUtil_b;
 
 /**
  * DB에 연결 데이터 입출력 처리
@@ -46,7 +46,7 @@ public class RentDao {
 					+ "and 대여여부 = 'Y'";
 		
 		
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = ConnectionUtil_b.getConnection();
 				PreparedStatement pstmt= conn.prepareStatement(sql);){
 			
 			// 파라메터 세팅 : ?표에 순서대로 입력
@@ -74,7 +74,7 @@ public class RentDao {
 				"insert into 대여 "
 				+ "values (seq_대여.nextval, ?,?,'Y'"
 				+ "			,sysdate,null,sysdate+7,null)";
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = ConnectionUtil_b.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);){
 			
 			pstmt.setString(1, id);
@@ -94,7 +94,7 @@ public class RentDao {
 				"update 대여 "
 				+ "set 반납일 = sysdate, 대여여부='N' "
 				+ "where 도서번호=?";
-		try (Connection conn = ConnectionUtil.getConnection();
+		try (Connection conn = ConnectionUtil_b.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);){
 			pstmt.setInt(1, no);
 			res = pstmt.executeUpdate();
