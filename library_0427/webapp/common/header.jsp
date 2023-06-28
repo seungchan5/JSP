@@ -19,7 +19,7 @@
 				<a href="">도서관리</a>
 				<a href="">사용자관리</a>
 			</div>
-			<div>로그아웃</div>
+			<div><a href='../logout.jsp'>로그아웃</a></div>
 		</c:if>		
 		
 		<!-- 사용자 -->
@@ -37,7 +37,7 @@
 		
 			<!-- 로그인 후 -->
 			<c:if test="${not res1 }">
-				<div>로그아웃</div>
+				<div><a href='../logout.jsp'>로그아웃</a></div>
 			</c:if>
 		</c:if>
 		

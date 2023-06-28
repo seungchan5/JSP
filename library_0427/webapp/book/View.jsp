@@ -60,12 +60,14 @@ ${map.message  }
     <!-- 하단 메뉴(버튼) -->
     <tr>
         <td colspan="5" align="center">
+        <c:if test="${sessionScope.adminYn eq 'Y' }">
             <button type="button" onclick="location.href='./edit.book?no=${dto.no}';">
                 수정하기
             </button>
             <button type="button" onclick="location.href='./delete.book?delNo=${ dto.no }';">
             	삭제하기
             </button>
+        </c:if>
             <button type="button" onclick="location.href='./list.book';">
                 목록 바로가기
             </button>

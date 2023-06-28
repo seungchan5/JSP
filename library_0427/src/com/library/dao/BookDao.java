@@ -31,7 +31,7 @@ public class BookDao {
 				+ "    select t.*,  rownum rn "
 				+ "    from ("
 				
-				+ " 		select no, title"
+				+ " 		select no, title, rentyn"
 //				+ "				    , nvl((select 대여여부 "
 //				+ "			 from 대여 "
 //				+ "			where 도서번호 = no "
