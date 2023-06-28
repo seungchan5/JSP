@@ -63,7 +63,7 @@ public class BookController extends HttpServlet{
 				JSFunction.alertBack(resp, "해당 번호에 해당하는 도서가 없습니다");
 			}
 			
-		}else {
+		} else {
 			JSFunction.alertBack(resp, "url을 확인해주세요");
 		}
 	}
@@ -118,6 +118,14 @@ public class BookController extends HttpServlet{
 				JSFunction.alertLocation(resp, "./view.book?no="+book.getNo(), "대여 되었습니다");
 			} else {
 				JSFunction.alertBack(resp, "대여중 오류 발생");
+			}
+		} else if(uri.indexOf("return")>0) {
+			
+			int res = bs.returnBook(req.getParameter("no"));
+			if(res>0) {
+				JSFunction.alertLocation(resp, "./view.book?no="+ req.getParameter("no"), "반납 되었습니다");
+			} else {
+				JSFunction.alertBack(resp, "반납 중 오류 발생");
 			}
 		}
 	}

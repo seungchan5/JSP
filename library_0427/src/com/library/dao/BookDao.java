@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import com.library.common.DBConnectionPool;
 import com.library.vo.Book;
@@ -252,7 +253,7 @@ public class BookDao {
 		
 		// 2. Book테이블 업데이트 (rentyn = Y, rentno = 대여번호)
 		//		조건 : 도서번호, rentno가 null또는 빈 문자열
-		String sql2 = "update book set rentno=? where no=? and (rentno is null or rentno='')";
+		String sql2 = "update book set rentno=?, rentyn='Y' where no=? and (rentno is null or rentno='')";
 		
 		// 3. 대여 테이블 인서트()
 		String sql3 = "insert into 대여 values(?, ?, ?,'Y', sysdate, null, sysdate+14, null)";
@@ -304,10 +305,52 @@ public class BookDao {
 			e.printStackTrace();
 		}
 		
+		return res;
+	}
+	
+	public int returnbook(String no) {
+		int res = 0;
 		
+		String sql1 = "delete from ("
+				+ "select * from 대여) where 도서번호 = ?";
+		
+		String sql2 = "update book set rentno='', rentyn='N'  where no=?";
+		
+		
+		try (Connection conn = DBConnectionPool.getConnection();) {
+			conn.setAutoCommit(false);
+			
+			PreparedStatement psmt = conn.prepareStatement(sql1);
+			
+			psmt.setString(1, no);
+			
+			res = psmt.executeUpdate();
+			
+			if(res>0) {
+				psmt.close();
+				psmt= conn.prepareStatement(sql2);
+				psmt.setString(1, no);
+				res = psmt.executeUpdate();
+				
+				if(res>0) {
+					conn.commit();
+				} else {
+					conn.rollback();
+				}
+				
+			} else {
+				conn.rollback();
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return res;
 	}
+	
 }
 
 
