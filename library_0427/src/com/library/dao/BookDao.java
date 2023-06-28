@@ -212,7 +212,7 @@ public class BookDao {
 				  + " , 반납일, sfile, ofile, d.대여번호"
 				  + " from book b, 대여 d where b.rentno = d.대여번호(+) and b.no="+no;
 		
-		System.out.println(sql);
+		//System.out.println(sql);
 		
 		// try ( 리소스생성 ) => try문이 종료되면서 리소스를 자동으로 반납
 		try (Connection conn = DBConnectionPool.getConnection();
