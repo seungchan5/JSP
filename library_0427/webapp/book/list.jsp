@@ -44,7 +44,7 @@
 		<tr>
 			<td colspan="5" class="right">
 				<!-- 어드민 계정인 경우 등록, 삭제 버튼을 출력 -->
-				<button>도서등록</button>
+				<button onclick="location.href='./write.book'">도서등록</button>
 				<button onclick="deleteBook()">도서삭제</button>
 			</td>
 		</tr>

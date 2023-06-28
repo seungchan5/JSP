@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="library_0427">
+        
+    <wb-module deploy-name="library_0427_m">
+                
         <wb-resource deploy-path="/" source-path="/webapp" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="library_0427"/>
-        <property name="java-output-path" value="/library_0427/bin"/>
+                
+        <property name="java-output-path" value="/library_0427_m/bin"/>
+        <property name="context-root" value="library_0427_m"/>
+            
     </wb-module>
+    
 </project-modules>

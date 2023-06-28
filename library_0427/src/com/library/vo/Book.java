@@ -1,11 +1,24 @@
 package com.library.vo;
 
 public class Book {
-	private int no;		// 도서 일련번호
+	private String no;		// 도서 일련번호
 	private String title;	// 도서명
-	private String rentyn;	// 도서 대여여부
 	private String author;	// 작가
+
+	private String sfile;	// 저장된파일명
+	private String ofile;	// 원본파일명
 	
+	private String id;		// 대여자 ID
+	private String rentyn;	// 도서 대여여부
+	private String rentno;	// 대여번호
+	private String startDate;	// 대여시작일
+	private String endDate;		// 반납가능일
+	private String returnDate; 	// 반납일
+	
+	public Book() {
+		
+	}
+
 	// 도서를 추가할 경우 도서명과 작가명만 알고 있으면 생성 가능
 	public Book(String title, String author) {
 		this.title = title;
@@ -14,7 +27,7 @@ public class Book {
 		this.rentyn = "N";
 	}
 	
-	public Book(int no, String title, String rentyn, String author) {
+	public Book(String no, String title, String rentyn, String author) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -29,8 +42,6 @@ public class Book {
 		// 도서가 rentYN=Y(대여중)인 경우 대여중으로 표시
 		if("Y".equals(getRentyn())) {
 			rentYNStr="대여중";
-		} else {
-			rentYNStr="대여가능";
 		}
 		return getNo()
 				+ " " + getTitle()
@@ -38,10 +49,34 @@ public class Book {
 				+ " " + rentYNStr;
 	}
 	
-	public int getNo() {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	
+	public String getNo() {
 		return no;
 	}
-	public void setNo(int no) {
+	public void setNo(String no) {
 		this.no = no;
 	}
 	public String getTitle() {
@@ -61,5 +96,36 @@ public class Book {
 	}
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+	public String getSfile() {
+		return sfile;
+	}
+	
+	public void setSfile(String sfile) {
+		this.sfile = sfile;
+	}
+	
+	public String getOfile() {
+		return ofile;
+	}
+	
+	public void setOfile(String ofile) {
+		this.ofile = ofile;
+	}
+
+	public String getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(String returnDate) {
+		this.returnDate = returnDate;
+	}
+
+	public String getRentno() {
+		return rentno;
+	}
+
+	public void setRentno(String rentno) {
+		this.rentno = rentno;
 	}
 }
