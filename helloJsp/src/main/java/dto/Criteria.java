@@ -6,10 +6,10 @@ public class Criteria {
 	String searchWord=""; // 검색어
 	
 	int pageNo = 1; // 요청한 페이지 번호
-	int amount = 10; // 한페지당 보여질 게시물 수
+	int amount = 5; // 한페지당 보여질 게시물 수
 	
 	int startNo = 1;
-	int endNo = 10;
+	int endNo = 5;
 	
 	public Criteria(int pageNo) {
 		if(pageNo>0) {
